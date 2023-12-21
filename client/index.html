@@ -8,5 +8,30 @@
     <script type="module" src="./app.js" defer></script>
     <title>Guestbook Project</title>
   </head>
-  <body></body>
+  <body>
+    <form id="guestbook-form">
+      <label>Username</label>
+      <input type="text" name="username" placeholder="Your username" required />
+
+      <label>Your message</label>
+      <input type="text" name="message" placeholder="Your message" required />
+
+      <div id="reactions">
+        <span>Your reaction:</span>
+        <input type="radio" id="smile" name="reaction" value="😀" checked />
+        <label for="smile">😀</label>
+
+        <input type="radio" id="cry" name="reaction" value="🥲" />
+        <label for="cry">🥲</label>
+
+        <input type="radio" id="love" name="reaction" value="😍" />
+        <label for="love">😍</label>
+
+        <input type="radio" id="angry" name="reaction" value="😡" />
+        <label for="angry">😡</label>
+      </div>
+
+      <button>Comment</button>
+    </form>
+  </body>
 </html>
