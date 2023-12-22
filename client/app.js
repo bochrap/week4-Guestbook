@@ -16,6 +16,8 @@ form.addEventListener("submit", async function (event) {
   });
   const json = await response.json();
   console.log(json);
+
+  form.reset();
 });
 
 async function getEntries() {
