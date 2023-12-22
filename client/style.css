@@ -27,3 +27,8 @@ span {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+
+input[name="message"] {
+  height: 200px;
+  text-align: start;
+}
