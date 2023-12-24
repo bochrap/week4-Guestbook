@@ -18,7 +18,6 @@ form.addEventListener("submit", async function (event) {
   console.log(json);
 
   form.reset();
-  await getEntries();
 });
 
 async function getEntries() {
@@ -49,6 +48,9 @@ async function getEntries() {
         }
       }
     }
+    // const btn = document.createElement("button");
+    // btn.textContent = "❌";
+    // btn.classList.add(``);
 
     postDiv.appendChild(div);
   });
