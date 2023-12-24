@@ -7,13 +7,16 @@ form.addEventListener("submit", async function (event) {
   const formValues = Object.fromEntries(formData);
   //   console.log(formValues);
 
-  const response = await fetch("http://localhost:8080/entries", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formValues),
-  });
+  const response = await fetch(
+    "https://guestbook-server-for-teched-week-4.onrender.com/entries",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formValues),
+    }
+  );
   const json = await response.json();
   console.log(json);
 
@@ -21,7 +24,9 @@ form.addEventListener("submit", async function (event) {
 });
 
 async function getEntries() {
-  const response = await fetch("http://localhost:8080/entries");
+  const response = await fetch(
+    "https://guestbook-server-for-teched-week-4.onrender.com/entries"
+  );
   const posts = await response.json();
   console.log(posts);
 
