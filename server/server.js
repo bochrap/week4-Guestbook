@@ -33,3 +33,23 @@ app.post("/entries", function (request, response) {
     .run(username, message, reaction);
   response.json(newEntry);
 });
+
+// app.delete("/entries/:id", function (request, response) {
+//   const recordId = request.params.id;
+//   db.run(`DELETE FROM guestbook WHERE id = ?`, [recordId], function () {
+//     res.json({
+//       message: "Record deleted successfully",
+//       changes: this.changes,
+//     });
+//   });
+// });
+
+app.delete("/entries/:id", function (request, response) {
+  const recordId = request.params.id;
+  const result = db.prepare(`DELETE FROM guestbook WHERE id = ?`).run(recordId);
+
+  response.json({
+    message: "Record deleted successfully",
+    changes: result.changes,
+  });
+});

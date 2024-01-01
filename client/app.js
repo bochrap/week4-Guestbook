@@ -18,6 +18,7 @@ form.addEventListener("submit", async function (event) {
   console.log(json);
 
   form.reset();
+  getEntries();
 });
 
 async function getEntries() {
@@ -29,7 +30,7 @@ async function getEntries() {
     const div = document.createElement("div");
     div.classList.add(`#${post.id}`); //? do I need this class ?
 
-    for (let i = 0; i <= posts.length; i++) {
+    for (let i = 0; i <= 5; i++) {
       const span = document.createElement("span");
       div.appendChild(span);
       if (i == 0) {
@@ -50,11 +51,37 @@ async function getEntries() {
     }
     const btn = document.createElement("button");
     btn.textContent = "❌";
-    btn.classList.add(`${post.id}`);
+    btn.classList.add(`delete${post.id}`);
     div.appendChild(btn);
 
     postDiv.appendChild(div);
   });
+
+  addEventListenerToButtons();
+}
+
+function addEventListenerToButtons() {
+  const btns = document.querySelectorAll("button[class^='delete']");
+  btns.forEach((button) => {
+    const postId = button.classList[0].replace("delete", "");
+    button.addEventListener("click", async function () {
+      console.log("hey");
+      const response = await fetch(`http://localhost:8080/entries/${postId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        getEntries();
+      }
+    });
+  });
 }
 
 getEntries();
+
+// const btns = document.querySelectorAll("button");
+// btns.forEach((button) => {
+//   console.log("adding event listener to", button);
+//   button.addEventListener("click", function () {
+//     console.log("hey");
+//   });
+// });
