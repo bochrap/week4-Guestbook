@@ -30,7 +30,8 @@ async function getEntries() {
     const div = document.createElement("div");
     div.classList.add(`#${post.id}`); //? do I need this class ?
 
-    for (let i = 0; i <= 5; i++) {
+    // Adjust i to 4 to display likes;
+    for (let i = 0; i <= 3; i++) {
       const span = document.createElement("span");
       div.appendChild(span);
       if (i == 0) {
@@ -50,10 +51,10 @@ async function getEntries() {
       }
     }
 
-    const likeBtn = document.createElement("button");
-    likeBtn.textContent = "👍";
-    likeBtn.classList.add(`like${post.id}`);
-    div.appendChild(likeBtn);
+    // const likeBtn = document.createElement("button");
+    // likeBtn.textContent = "👍";
+    // likeBtn.classList.add(`like${post.id}`);
+    // div.appendChild(likeBtn);
 
     const delBtn = document.createElement("button");
     delBtn.textContent = "❌";
@@ -64,7 +65,32 @@ async function getEntries() {
   });
 
   addEventListenerToDelButtons();
+  // addEventListenerToLikeButtons();
 }
+//*** LIKES ARE KIND OF FUNCTIONAL BUT ASYNC FUNCTIONS ARE MESSING EVERYTHING UP AND I DON'T KNOW HOW TO MAKE THE PAGE NOT REFRESH AND GENERATE ALL BUTTONS FROM SCRATCH AFTER CLICKING ONE***
+
+// function addEventListenerToLikeButtons() {
+//   const btns = document.querySelectorAll("button[class^='like']");
+//   btns.forEach((button) => {
+//     const postId = button.classList[0].replace("like", "");
+//     button.addEventListener("click", async function () {
+//       const isClicked = button.classList.contains("clicked");
+//       const likesValue = isClicked ? -1 : 1;
+//       const response = await fetch(`http://localhost:8080/entries/${postId}`, {
+//         method: "PUT",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           likes: likesValue,
+//         }),
+//       });
+//       if (response.ok) {
+//         button.classList.toggle("clicked");
+//       }
+//     });
+//   });
+// }
 
 function addEventListenerToDelButtons() {
   const btns = document.querySelectorAll("button[class^='delete']");
@@ -82,11 +108,3 @@ function addEventListenerToDelButtons() {
 }
 
 getEntries();
-
-// const btns = document.querySelectorAll("button");
-// btns.forEach((button) => {
-//   console.log("adding event listener to", button);
-//   button.addEventListener("click", function () {
-//     console.log("hey");
-//   });
-// });

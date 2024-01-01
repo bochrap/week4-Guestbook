@@ -34,16 +34,6 @@ app.post("/entries", function (request, response) {
   response.json(newEntry);
 });
 
-// app.delete("/entries/:id", function (request, response) {
-//   const recordId = request.params.id;
-//   db.run(`DELETE FROM guestbook WHERE id = ?`, [recordId], function () {
-//     res.json({
-//       message: "Record deleted successfully",
-//       changes: this.changes,
-//     });
-//   });
-// });
-
 app.delete("/entries/:id", function (request, response) {
   const recordId = request.params.id;
   const result = db.prepare(`DELETE FROM guestbook WHERE id = ?`).run(recordId);
@@ -52,4 +42,22 @@ app.delete("/entries/:id", function (request, response) {
     message: "Record deleted successfully",
     changes: result.changes,
   });
+});
+
+app.put("/entries/:id", (request, response) => {
+  const recordId = request.params.id;
+  const { likes } = request.body;
+
+  const updateLikes = db.prepare(
+    `UPDATE guestbook SET likes = COALESCE(likes, 0) + ? WHERE id = ?`
+  );
+  const result = updateLikes.run(likes, recordId);
+
+  if (result.changes > 0) {
+    response.status(200).json({ message: `likes updated successfully` });
+  } else {
+    response
+      .status(404)
+      .json({ message: `Record not found or no changes made` });
+  }
 });
