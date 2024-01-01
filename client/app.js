@@ -25,6 +25,7 @@ form.addEventListener("submit", async function (event) {
 });
 
 async function getEntries() {
+  postDiv.innerHTML = "";
   const response = await fetch(
     "https://guestbook-server-for-teched-week-4.onrender.com/entries"
   );
