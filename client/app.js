@@ -108,9 +108,9 @@ function addEventListenerToDelButtons() {
           method: "DELETE",
         }
       );
-      if (response.ok) {
-        getEntries();
-      }
+      // if (response.ok) {
+      //   getEntries();
+      // }
     });
   });
 }
