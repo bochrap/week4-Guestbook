@@ -49,23 +49,28 @@ async function getEntries() {
         }
       }
     }
-    const btn = document.createElement("button");
-    btn.textContent = "❌";
-    btn.classList.add(`delete${post.id}`);
-    div.appendChild(btn);
+
+    const likeBtn = document.createElement("button");
+    likeBtn.textContent = "👍";
+    likeBtn.classList.add(`like${post.id}`);
+    div.appendChild(likeBtn);
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "❌";
+    delBtn.classList.add(`delete${post.id}`);
+    div.appendChild(delBtn);
 
     postDiv.appendChild(div);
   });
 
-  addEventListenerToButtons();
+  addEventListenerToDelButtons();
 }
 
-function addEventListenerToButtons() {
+function addEventListenerToDelButtons() {
   const btns = document.querySelectorAll("button[class^='delete']");
   btns.forEach((button) => {
     const postId = button.classList[0].replace("delete", "");
     button.addEventListener("click", async function () {
-      console.log("hey");
       const response = await fetch(`http://localhost:8080/entries/${postId}`, {
         method: "DELETE",
       });
